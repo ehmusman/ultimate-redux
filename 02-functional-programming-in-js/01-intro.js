@@ -132,12 +132,12 @@ function random(a) {
     return Math.random() * a
 }
 random(5)
- // this is not a pure function
+// this is not a pure function
 
- // so in Pure function
- // 1- we dont get random values
- // no currnt date/time
- // we canot read or change global state (DOM, files, db etc)
+// so in Pure function
+// 1- we dont get random values
+// no currnt date/time
+// we canot read or change global state (DOM, files, db etc)
 // in practice not every function is a pure.
 // in practice we have special functions called reducers. we have to make it sure that the reducers should be pure and other function can be impure.
 // in pure functions we cannot mutate the parameters.
@@ -147,3 +147,76 @@ random(5)
 // easily testable,
 // concurrency // means they cann be run parallel.
 // Cacheable
+// pure functions can not be changed or mutate their arguments.
+
+
+////////////////////////////////////////////////////////////////////////////
+
+// Immutability
+// means once we create an object, we cannot change or mutate it.
+// if we want to change it. we have to take the copy first and then we have to add the changings in it.
+// in js objects and arrays are not immutable thats why js is not a pure functional programming. because in pure functional languages we cannot mutate data.  if we have to change the string. we have to take its copy first
+// const is not for immutability. its prevent reasssignment.
+// strings in javascript and in most programming languages are immutable
+const name = "usman"
+const up = name.toUpperCase()
+
+// what are the benefits of immutability?
+// 1- predictability
+// 2- faster change detection // if an object is saved at 100 memory location. if any of the property is changed in it it will sve at diferent location. which react detects vey easily instead of comparing all the properties of that object.
+// 3- concurrency (if a function doesnot mutate data we know that we can run this function parallel because its not going to save in the memory.)
+
+// mutability and immutability has their own pros and cons.
+// there are some cons of immutability
+// 1- performance. if there arre several hundereds or thousands of object than performance id affected. 
+// memory overhead
+// there are some libraries to overcome the overhead memory problem
+
+// here the we have to keep it in mind that if we are building application with redux we dont have to mutate data. its a fundamental principle.
+
+
+/////////////////////////////////////////////////////
+
+// Practicing immutability (Updating Objects)
+
+// const person ={name: "Usman"}
+// const updated = {...person, name: "Farooq"}
+// console.log(updated)
+// in case of nested objects
+
+// const person = {
+//  name: "Usman",
+//  address: {
+//  country: "USA"
+//  city: "Faisalabad"
+// } }
+// const updated = {...person, addredd: {...person.address, city "Lahore"}, name: "Farooq"}
+
+
+
+//////////////////////////////////////////////////////////////////
+
+// Updating Arrays
+// const numbers = [1,2,3]
+
+// Adding,
+// const added = [...numbers, 4]
+
+// adding after any number. lets '2'
+// const index = number.indexOf(2)
+// const added = [
+//  ...numbers.slice(0,index),
+//  4,
+//  ...numbers.slice(index)
+// ]
+
+
+
+// Removing an item like 2
+
+// const removed = number.filter(n => n!==2)
+
+// updating
+// const update = number.map(n => n = 2 ? 20: n )
+
+
