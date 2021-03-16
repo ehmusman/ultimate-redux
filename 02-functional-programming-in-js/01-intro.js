@@ -220,3 +220,13 @@ const up = name.toUpperCase()
 // const update = number.map(n => n = 2 ? 20: n )
 
 
+
+///////////////////////////////////////////////////////////////////
+// enforcing Immutable
+
+// there are some libraries that are used to make the javascript immutable like
+//1- Immutable
+// 2- Immer
+// 3- Mori
+
+
