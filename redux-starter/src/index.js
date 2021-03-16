@@ -1,19 +1,23 @@
 import store from './store'
 
-console.log(store)
+// console.log(store)
 
-// store.dispatch({
-//     type: "bugAdded",
-//     payload: {
-//         id: Math.random() * 123456765432,
-//         description: "Bug1",
-//         resolved: false
-//     }
-// })
+const unsubscribe = store.subscribe(() => {
+    console.log("Store Changed", store.getState())
+})
+store.dispatch({
+    type: "bugAdded",
+    payload: {
+        id: 1,
+        description: "Bug1",
+        resolved: false
+    }
+})
+unsubscribe()
 store.dispatch({
     type: "bugRemoved",
     payload: {
-        id: 2086970775.3295555
+        id: 1
     }
 })
 
