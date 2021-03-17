@@ -1,4 +1,45 @@
-import { ADD_BUG, REMOVE_BUG, UPDATE_BUG } from './actionTypes'
+
+// Action Types
+const ADD_BUG = "ADD_BUG";
+const REMOVE_BUG = "REMOVE_BUG";
+const UPDATE_BUG = "UPDATE_BUG";
+
+
+
+// Action Creators
+
+let lastId = 0;
+export const addBug = (bug) => {
+    return {
+        type: ADD_BUG,
+        payload: {
+            id: lastId++,
+            description: bug,
+            status: false
+        }
+    }
+}
+
+export const updateBug = id => {
+    return {
+        type: UPDATE_BUG,
+        payload: {
+            id,
+            status: true
+        }
+    }
+}
+export const removeBug = id => {
+    return {
+        type: REMOVE_BUG,
+        payload: {
+            id
+        }
+    }
+}
+
+// Reducer
+
 
 const initialState = {
     bugs: [],
