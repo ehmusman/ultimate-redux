@@ -9,13 +9,13 @@ const unsubscribe = store.subscribe(() => {
 })
 
 // create a bug
-store.dispatch(addBug("Bug1"))
+// store.dispatch(addBug("Bug1"))
 // unsubscribe()
 // delete a bug
 // store.dispatch(removeBug(1))
 
 // update Bug
-store.dispatch(updateBug(1))
+// store.dispatch(updateBug(1))
 
 // update a bug
 
