@@ -12,3 +12,29 @@
 //  // we have to do some configuration
 // 
 // })
+
+
+
+//////////////////////////////////////////////////////
+
+// createAction
+
+// import {createAction} from '@reduxjs-toolkit'
+
+// const addBug = createAction("addBug")
+// console.log(addBug)
+// it will return a function, call it.
+
+
+// console.log(addBug())
+// it will return an object with properties type and payload. type will be same as written inside the parantheses of createAction().
+
+// when we call it and if we add an object inside the parantheses it becomes the payload.
+// console.log(addBug({id: 1}))
+// { type: "addBug"
+//      payload: {
+    // id: 1
+// }
+// }
+
+// now we dont need to ccreate constants and saperate action creators. pass the payload where we call these functions

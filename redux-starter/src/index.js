@@ -10,25 +10,29 @@ const unsubscribe = store.subscribe(() => {
 })
 
 // create a bug
-store.dispatch(addBug("Bug1"))
-store.dispatch(addBug("Bug2"))
-store.dispatch(addBug("Bug3"))
-store.dispatch(addBug("Bug4"))
-store.dispatch(addBug("Bug5"))
-store.dispatch(addBug("Bug6"))
+store.dispatch(addBug({ description: "Bug1" }))
+store.dispatch(addBug({ description: "Bug2" }))
+store.dispatch(addBug({ description: "Bug3" }))
+store.dispatch(addBug({ description: "Bug4" }))
+store.dispatch(addBug({ description: "Bug5" }))
+store.dispatch(addBug({ description: "Bug6" }))
 
-
-// delete a bug
-// store.dispatch(removeBug(1))
 
 // update Bug
-store.dispatch(updateBug(0))
-store.dispatch(updateBug(1))
-store.dispatch(updateBug(2))
-store.dispatch(updateBug(3))
-store.dispatch(updateBug(4))
-store.dispatch(updateBug(5))
+store.dispatch(updateBug({ id: 0, status: true }))
+store.dispatch(updateBug({ id: 1, status: true }))
+store.dispatch(updateBug({ id: 2, status: true }))
+store.dispatch(updateBug({ id: 3, status: true }))
+store.dispatch(updateBug({ id: 4, status: true }))
+store.dispatch(updateBug({ id: 5, status: true }))
 
-// update a bug
+// remove Bug
+store.dispatch(removeBug({ id: 0 }))
+store.dispatch(removeBug({ id: 1 }))
+store.dispatch(removeBug({ id: 2 }))
+store.dispatch(removeBug({ id: 3 }))
+store.dispatch(removeBug({ id: 4 }))
+store.dispatch(removeBug({ id: 5 }))
 
-// console.log(store.getState())
+
+

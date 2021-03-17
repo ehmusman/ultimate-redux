@@ -1,64 +1,39 @@
 
-// Action Types
-const ADD_BUG = "ADD_BUG";
-const REMOVE_BUG = "REMOVE_BUG";
-const UPDATE_BUG = "UPDATE_BUG";
+import { createAction } from '@reduxjs/toolkit'
 
+// add createAction
 
+export const addBug = createAction("BUG_ADDED")
+export const updateBug = createAction("BUG_UPDATED")
+export const removeBug = createAction("BUG_REMOVED")
 
-// Action Creators
-
-let lastId = 0;
-export const addBug = (bug) => {
-    return {
-        type: ADD_BUG,
-        payload: {
-            id: lastId++,
-            description: bug,
-            status: false
-        }
-    }
-}
-
-export const updateBug = id => {
-    return {
-        type: UPDATE_BUG,
-        payload: {
-            id,
-            status: true
-        }
-    }
-}
-export const removeBug = id => {
-    return {
-        type: REMOVE_BUG,
-        payload: {
-            id
-        }
-    }
-}
 
 // Reducer
 
 
 const initialState = {
-    bugs: [],
-    currentUser: {}
+    bugs: []
 }
+let lastId = 0;
+
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case ADD_BUG:
+        case addBug.type:
             return {
                 ...state,
-                bugs: [action.payload, ...state.bugs]
+                bugs: [{
+                    id: lastId++,
+                    description: action.payload.description,
+                    status: false
+                }, ...state.bugs]
             }
-        case REMOVE_BUG:
+        case removeBug.type:
             return {
                 ...state,
                 bugs: state.bugs.filter(bug => bug.id !== action.payload.id)
             }
-        case UPDATE_BUG:
+        case updateBug.type:
             return {
                 ...state,
                 bugs: state.bugs.map(bug => bug.id === action.payload.id ? { ...bug, status: true } : bug)
