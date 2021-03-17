@@ -18,19 +18,19 @@ const state = {
 
 
 export default createReducer(state, {
-    bugAdded: (state, action) => {
+    [bugAdded.type]: (state, action) => {
         state.bugs.push({
             id: lastId++,
             description: action.payload.description,
             status: false
         })
     },
-    bugUpdated: (state, action) => {
+    [bugUpdated.type]: (state, action) => {
         let bug = state.bugs.find(bug => bug.id === action.payload.id)
         bug.status = action.payload.status
 
     },
-    bugRemoved: (state, action) => {
+    [bugRemoved.type]: (state, action) => {
         const index = state.bugs.findIndex(bug => bug.id === action.payload.id)
         state.bugs.splice(index, 1)
     }
