@@ -6,3 +6,15 @@
 // Error Reporting
 // Analytics
 // authorization
+
+
+///////////////////////////////////////////////////////////////////
+/// dispatching a function
+// we have learnt that actions should be plane object with type as a property.
+
+// we cannot dispatch an empty object and also we cannot dispatch a function
+// why we are dispatching a function?????
+// to Call an API
+// when the promise is resolved  => dispatch() // dispatch an action to do something
+// when the promise is rejected => dispatch()  // dispatch an action to indicate the occured error
+// we absolutely have some logic to do some thing and then send the object in dispatch. 

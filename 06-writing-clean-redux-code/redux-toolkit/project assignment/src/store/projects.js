@@ -1,28 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
-const state = {
-    projects: []
-}
+const state = []
 let lastId = 0;
 
 const slice = createSlice({
     name: "projects",
     initialState: state,
     reducers: {
-        addProject: (state, action) => {
-            state.projects.push({
+        addProject: (projects, action) => {
+            projects.push({
                 id: lastId++,
                 project: action.payload.project
             })
         },
-        updateProject: (state, action) => {
-            let selectedProject = state.projects.find(project => project.id === action.payload.id)
+        updateProject: (projects, action) => {
+            let selectedProject = projects.find(project => project.id === action.payload.id)
             selectedProject.project = action.payload.project
         },
-        removeProject: (state, action) => {
-            let index = state.projects.findIndex(project => project.id === action.payload.id)
-            state.projects.splice(index, 1)
+        removeProject: (projects, action) => {
+            let index = projects.findIndex(project => project.id === action.payload.id)
+            projects.splice(index, 1)
         }
     }
 })
