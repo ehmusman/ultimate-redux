@@ -60,4 +60,13 @@
 //
 
 
+//////////////////////////////////////////////////////
+// normalization
+
+// an important topic is normalization of data. its just meaning is that the there should be no duplication of data in the store. because is may cause inconsistancy. we have to update the data at every place. also updating a nested objects is also a complex task at the end. so we have to avoid the nested structure. so we have to keep the data structure as flat as possible. so instead of nesting we have to use the id of that saperate block so that we canaccess it easily whenever we want
+
+
+//normalizr is a library used to normalize the data. its easy to use 
+
+
 
