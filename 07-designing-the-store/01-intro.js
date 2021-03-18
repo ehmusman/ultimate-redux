@@ -80,3 +80,10 @@
 
 
 /// this all is just like the queries in the mongodb case
+
+
+
+///////////////////////////////////////////////////////////////
+// Memoization
+
+/// memoization is a technique to optimize the expensive functions
