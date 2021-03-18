@@ -5,9 +5,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 let lastId = 0;
 
-const state = {
-    bugs: []
-}
+const state = []
 
 // create slice, combination of both createActions and createReducer
 const slice = createSlice({
@@ -15,19 +13,19 @@ const slice = createSlice({
     initialState: state,
     reducers: {
         bugAdded: (state, action) => {
-            state.bugs.push({
+            state.push({
                 id: lastId++,
                 description: action.payload.description,
                 status: false
             })
         },
         bugUpdated: (state, action) => {
-            let bug = state.bugs.find(bug => bug.id === action.payload.id)
+            let bug = state.find(bug => bug.id === action.payload.id)
             bug.status = action.payload.status
 
         },
         bugRemoved: (state, action) => {
-            const index = state.bugs.findIndex(bug => bug.id === action.payload.id)
+            const index = state.findIndex(bug => bug.id === action.payload.id)
             state.bugs.splice(index, 1)
         }
     }
