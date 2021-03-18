@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './rootReducer';
-// import reducer from './bug';
+import reducer from './entities';
 
 
 export default function configStore() {

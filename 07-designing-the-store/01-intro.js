@@ -56,6 +56,8 @@
 }
 // in this way we have top level slices to manage the child slices by their functionalities
 
+// by combining the reducers we create a hierarche of reducers
+//
 
 
 
