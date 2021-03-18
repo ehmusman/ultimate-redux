@@ -54,10 +54,6 @@ store.dispatch(bugUpdated({ id: 2, status: true }))
 
 // selectors 
 // get unresolved bugs
-const x = getUnresolvedBugs(store.getState())
-const y = getUnresolvedBugs(store.getState())
-console.log(x)
-console.log(y)
-console.log(x === y)
-
+const unresolvedBugs = getUnresolvedBugs(store.getState())
+console.log(unresolvedBugs)
 

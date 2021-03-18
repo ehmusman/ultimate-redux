@@ -43,17 +43,17 @@
 
 // some time we may have more than one slices. we have to put them under the parent sliices in order to manage and maintainable
 // like 
-{
-    entities: {
-        bugs: [],
-            projects: [],
-                tags: []
-    },
-    auth: { userId: 1, name: "usman" },
-    ui: {
-        // store states specific to certain pages or components
-    }
-}
+// {
+//     entities: {
+//         bugs: [],
+//             projects: [],
+//                 tags: []
+//     },
+//     auth: { userId: 1, name: "usman" },
+//     ui: {
+//         // store states specific to certain pages or components
+//     }
+// }
 // in this way we have top level slices to manage the child slices by their functionalities
 
 // by combining the reducers we create a hierarche of reducers
@@ -87,3 +87,18 @@
 // Memoization
 
 /// memoization is a technique to optimize the expensive functions
+// the above implementation for getting unresolved bugs has a tiny problem. the problem is that the filter method returns an array every time when we call it.
+// if we call this two time we'll get two different results. even the state is same the returned bugs are same. pher b answer false me aye ga. 
+// const x = getUnResolvedBugs(store.getState())
+// const y = getUnResolvedBugs(store.getState())
+// console.log(x === y)   // answer is false. because two different arrays are returned but they have same values
+// the reason is that there are two different memory locations are assigned to it. therefore the comparison is returning the false answer
+// why there is a problem? we know in react when state changes the componentgs get rerenders. that is the problem with this filter method
+// here is the logic is simple. what if the logic is complex? 
+// we assume it needs 0.5 seconds to complete the logic. if the bugs are same no bugs are resolved same array will be returned. and component will be rerender. this is wher we can use memoization
+
+// memoization is a technique for optimizing the expensive functions
+// let we have a function that takes x and returns y
+// f(x) => y   {input: 1, output: 2}
+// we can build a cache of inputs and outputs
+// if we send same input we'll get same output. in this case this output will be stores in the cache. so looping through the array and find the resolved bug and waiting 0.5 seconds and rerenders the component again and again is not a big problem now. we'll get the answer from cache. 

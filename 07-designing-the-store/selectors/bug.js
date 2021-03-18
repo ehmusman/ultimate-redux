@@ -1,6 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit'
-import { createSelector } from 'reselect'
+
 // Reducer
 
 let lastId = 0;
@@ -32,12 +32,7 @@ const slice = createSlice({
 
 })
 
-// Memoization
-// bugs => get unresolved bugs from cache
-export const getUnresolvedBugs = createSelector(
-    state => state.entities.bugs,
-    bugs => bugs.filter(bug => !bug.status)
-)
+export const getUnresolvedBugs = state => state.entities.bugs.filter(bug => !bug.status)
 
 export const { bugAdded, bugUpdated, bugRemoved } = slice.actions
 export default slice.reducer
