@@ -1,0 +1,1 @@
+// middleware is a building block that allows us to run side affects such as calling APIs
