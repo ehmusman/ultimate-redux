@@ -69,4 +69,14 @@
 //normalizr is a library used to normalize the data. its easy to use 
 
 
+////////////////////////////////////////////////
+// selectors
+// selectors are that function that takes a state and returned a computed state
+// // in the bugs write the code
+// export const getUnResolvedBugs = state => state.entities.bugs.filter(bug => !bug.status)
 
+// // in index.js write 
+// const unresolvedBugs = getUnResolvedBugs(store.getState())
+
+
+/// this all is just like the queries in the mongodb case
