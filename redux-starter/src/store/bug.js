@@ -55,5 +55,5 @@ const url = '/bugs'
 // Action Creator
 export const loadBugs = () => apiCallBegan({
     url,
-    onSuccess: bugsReceived
+    onSuccess: bugsReceived.type
 })

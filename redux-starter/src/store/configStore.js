@@ -8,7 +8,9 @@ export default function configStore() {
     return configureStore({
         reducer,
         middleware: [
-            ...getDefaultMiddleware(),
+            ...getDefaultMiddleware({
+                serializableCheck: false
+            }),
             logger({ destination: "Console" }),
             api
         ]
