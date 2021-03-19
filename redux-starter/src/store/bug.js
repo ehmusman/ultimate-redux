@@ -1,6 +1,8 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
+import { apiCallBegan } from './api'
+
 // Reducer
 
 let lastId = 0;
@@ -15,6 +17,9 @@ const slice = createSlice({
         lastFetch: null   // usefull if we want to use data from cache
     },
     reducers: {
+        bugsReceived: (bugs, action) => {
+            bugs.list = action.payload
+        },
         bugAdded: (bugs, action) => {
             bugs.list.push({
                 id: lastId++,
@@ -35,6 +40,7 @@ const slice = createSlice({
 
 })
 
+
 // Memoization
 // bugs => get unresolved bugs from cache
 export const getUnresolvedBugs = createSelector(
@@ -42,5 +48,12 @@ export const getUnresolvedBugs = createSelector(
     bugs => bugs.filter(bug => !bug.status)
 )
 
-export const { bugAdded, bugUpdated, bugRemoved } = slice.actions
+export const { bugAdded, bugsReceived, bugUpdated, bugRemoved } = slice.actions
 export default slice.reducer
+
+const url = '/bugs'
+// Action Creator
+export const loadBugs = () => apiCallBegan({
+    url,
+    onSuccess: bugsReceived
+})
