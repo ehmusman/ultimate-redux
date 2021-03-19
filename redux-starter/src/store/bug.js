@@ -4,10 +4,9 @@ import { createSelector } from 'reselect'
 import { apiCallBegan } from './api'
 
 import moment from 'moment'
+
+
 // Reducer
-
-let lastId = 0;
-
 
 // create slice, combination of both createActions and createReducer
 const slice = createSlice({
@@ -30,11 +29,7 @@ const slice = createSlice({
                 bugs.loading = false
         },
         bugAdded: (bugs, action) => {
-            bugs.list.push({
-                id: lastId++,
-                description: action.payload.description,
-                status: false
-            })
+            bugs.list.push(action.payload)
         },
         bugUpdated: (bugs, action) => {
             let bug = bugs.list.find(bug => bug.id === action.payload.id)
@@ -76,3 +71,9 @@ export const loadBugs = () => (dispatch, getState) => {
         })
     )
 }
+export const addBug = bug => apiCallBegan({
+    url,
+    method: 'post',
+    data: bug,
+    onSuccess: bugAdded.type
+})
