@@ -5,28 +5,31 @@ import { createSelector } from 'reselect'
 
 let lastId = 0;
 
-const state = []
 
 // create slice, combination of both createActions and createReducer
 const slice = createSlice({
     name: "bugs",
-    initialState: state,
+    initialState: {
+        list: [],
+        loading: false,
+        lastFetch: null   // usefull if we want to use data from cache
+    },
     reducers: {
-        bugAdded: (state, action) => {
-            state.push({
+        bugAdded: (bugs, action) => {
+            bugs.list.push({
                 id: lastId++,
                 description: action.payload.description,
                 status: false
             })
         },
-        bugUpdated: (state, action) => {
-            let bug = state.find(bug => bug.id === action.payload.id)
+        bugUpdated: (bugs, action) => {
+            let bug = bugs.list.find(bug => bug.id === action.payload.id)
             bug.status = action.payload.status
 
         },
-        bugRemoved: (state, action) => {
-            const index = state.findIndex(bug => bug.id === action.payload.id)
-            state.bugs.splice(index, 1)
+        bugRemoved: (bugs, action) => {
+            const index = bugs.list.findIndex(bug => bug.id === action.payload.id)
+            bugs.list.splice(index, 1)
         }
     }
 

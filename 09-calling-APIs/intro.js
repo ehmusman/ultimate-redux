@@ -18,3 +18,16 @@
 // NOW here is a problem we have to repeat these steps every time when we call an API. this problem can be solved by using a middleware
 
 ///////////////////////////////////////////////////////////////////
+// actions are created
+
+
+///////////////////////////////////////////////////////////////////
+// restructuring the store
+// bugs state is splitted to three slices
+// name: "bugs",
+// initialState: {
+//     list: [],
+//     loading: false,
+//     lastFetch: null   // usefull if we want to use data from cache
+// },
+
