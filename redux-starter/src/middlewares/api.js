@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { apiCallBegan, apiCallFailed, apiCallSuccess } from '../store/api'
 
 const api = ({ dispatch }) => next => async action => {
-    if (action.type !== "apiCallBegan") return next(action)
+    if (action.type !== apiCallBegan.type) return next(action)
     next(action)
     const { url, method, data, onSuccess, onError } = action.payload;
     try {
@@ -11,9 +12,15 @@ const api = ({ dispatch }) => next => async action => {
             method,
             data
         })
-        dispatch({ type: onSuccess, payload: response.data })
+        // general
+        dispatch(apiCallSuccess(response.data))
+        // specific
+        if (onSuccess) dispatch({ type: onSuccess, payload: response.data })
     } catch (error) {
-        dispatch({ type: onError, payload: error })
+        // general
+        dispatch(apiCallFailed(error))
+        // specific
+        if (onError) dispatch({ type: onError, payload: error })
     }
 }
 export default api;
