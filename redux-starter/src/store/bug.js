@@ -17,8 +17,15 @@ const slice = createSlice({
         lastFetch: null   // usefull if we want to use data from cache
     },
     reducers: {
+        bugsRequestFailed: (bugs, action) => {
+            bugs.loading = false
+        },
+        bugsRequested: (bugs, action) => {
+            bugs.loading = true
+        },
         bugsReceived: (bugs, action) => {
             bugs.list = action.payload
+            bugs.loading = false
         },
         bugAdded: (bugs, action) => {
             bugs.list.push({
@@ -48,12 +55,14 @@ export const getUnresolvedBugs = createSelector(
     bugs => bugs.filter(bug => !bug.status)
 )
 
-export const { bugAdded, bugsReceived, bugUpdated, bugRemoved } = slice.actions
+export const { bugAdded, bugsReceived, bugUpdated, bugRemoved, bugsRequested, bugsRequestFailed } = slice.actions
 export default slice.reducer
 
 const url = '/bugs'
 // Action Creator
 export const loadBugs = () => apiCallBegan({
     url,
-    onSuccess: bugsReceived.type
+    onStart: bugsRequested.type,
+    onSuccess: bugsReceived.type,
+    onError: bugsRequestFailed.type
 })
