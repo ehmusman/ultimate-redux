@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import { apiCallBegan } from "./api";
+import moment from 'moment';
 
 // reducer
-let lastId = 1;
 const slice = createSlice({
     name: "bugs",
     initialState: {
@@ -11,12 +11,19 @@ const slice = createSlice({
         lastFetch: null
     },
     reducers: {
+        bugsRequested: (bugs, action) => {
+            bugs.loading = true
+        },
+        bugsRequestFailed: (bugs, action) => {
+            bugs.loading = false
+        },
+        bugsReceived: (bugs, action) => {
+            bugs.list = action.payload,
+                bugs.lastFetch = Date.now()
+            bugs.loading = false
+        },
         bugAdded: (bugs, action) => {
-            bugs.list.push({
-                id: lastId++,
-                description: action.payload.description,
-                resolved: false
-            })
+            bugs.list.push(action.payload)
         },
         bugUpdated: (bugs, action) => {
             const bug = bugs.list.find(bug => bug.id === action.payload.id)
@@ -30,4 +37,34 @@ const slice = createSlice({
 })
 
 export default slice.reducer
-export const { bugAdded, bugUpdated, bugDeleted } = slice.actions
+const { bugAdded, bugUpdated, bugDeleted, bugsReceived, bugsRequested, bugsRequestFailed } = slice.actions
+
+const url = '/bugs'
+export const loadBugs = () => (dispatch, getState) => {
+    const { lastFetch } = getState().entities.bugs
+    const diffInMinutes = moment().diff(moment(lastFetch), 'minute');
+    // if (diffInMinutes < 10) return;
+
+    dispatch(
+        apiCallBegan({
+            url,
+            onStart: bugsRequested.type,
+            onSuccess: bugsReceived.type,
+            onError: bugsRequestFailed.type
+        })
+    )
+}
+
+export const addBug = (bug) => apiCallBegan({
+    url,
+    method: 'post',
+    data: bug,
+    onSuccess: bugAdded.type
+})
+
+export const updateBug = id => apiCallBegan({
+    url: url + '/' + id,
+    method: "patch",
+    data: { resolved: false },
+    onSuccess: bugUpdated.type
+})

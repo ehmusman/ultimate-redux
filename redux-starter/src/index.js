@@ -1,12 +1,22 @@
 import configStore from './store2/configStore'
 const store = configStore()
+import { loadBugs, addBug, updateBug } from './store2/bugs'
 // import { bugUpdated, bugAdded, bugDeleted } from './store2/bugs'
 // import { projectAdded, projectDeleted, projectUpdated } from './store2/projects'
 
 /// calling APIs
+store.dispatch(loadBugs())
 
+setTimeout(() => {
+    store.dispatch(loadBugs())
+}, 2000)
 
+// add bug
+store.dispatch(addBug({ description: "new bugggg" }))
 
+// update Bug
+
+store.dispatch(updateBug(1))
 
 
 
